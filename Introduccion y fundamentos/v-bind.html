@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+    
+    <div id="app"></div>
+
+    <script>
+        const vm = Vue.createApp({
+            data(){
+                return{
+                    attr: "src",
+                    img: 'https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg'
+                };
+            },
+            // v-once -- nos permite declarar algo y que no se pueda modificar su valor
+            template: `
+                <img :src="img" :alt="img" />
+                <hr>
+                <img :["src"]="img" />
+                <hr>
+                <img :[attr]="img" />
+            `
+        }).mount("#app");
+    </script>
+</body>
+</html>
