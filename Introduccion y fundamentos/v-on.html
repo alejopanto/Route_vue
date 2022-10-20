@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+    
+    <div id="app"></div>
+
+    <script>
+        const vm = Vue.createApp({
+            data(){
+                return{
+                    counter: 0,
+                    evt: "submit"
+                };
+            },
+            methods:{
+                increments(){
+                    this.counter++
+                },
+                submit(e){
+                    console.log(e)
+                    e.preventDefault()
+                },
+                submit2(){
+                    this.counter--
+                }
+            },
+            template: `
+                <button v-on:click="increments"> {{counter}} </button>
+                <hr>
+                <form v-on:submit="submit"><button>submit</button></form> 
+                <hr>
+                <form @submit.prevent="submit2"><button> {{counter}} </button></form> 
+                <hr>
+                <form @[evt].prevent="submit2"><button> {{counter}} </button></form> 
+            `
+
+        }).mount("#app");
+    </script>
+</body>
+</html>
