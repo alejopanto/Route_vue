@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+    
+    <div id="app"></div>
+
+    <script>
+        const vm = Vue.createApp({
+            data(){
+                return{
+                    text: "La puerta esta cerrada",
+                    puerta: false
+                };
+            },
+            watch: {
+                puerta(value, old){
+                    // value is the new value, old is the last value
+                    console.log('ejecutado', value, old, this.text)
+                    if (value) {
+                        this.text = 'La puerta esta abierta'
+                    }else {
+                        this.text = 'La puerta esta cerrada'
+                    }
+                }
+            },
+            computed: {
+                textButton(){
+                    return this.puerta ? 'Cerrar' : 'Abrir'
+                }
+            },
+            template: `
+                <div>{{text}}</div>
+                <button @click='puerta = !puerta'>{{textButton}}</button>
+            `
+
+        }).mount("#app");
+    </script>
+</body>
+</html>
