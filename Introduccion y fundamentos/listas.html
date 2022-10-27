@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+    
+    <div id="app"></div>
+
+    <script>
+        const vm = Vue.createApp({
+            data(){
+                return{
+                    text: "La puerta esta cerrada",
+                    puerta: false,
+
+                    posts: [
+                        {
+                            title: 'Titulo 1',
+                            description: 'mi descripcion'
+                        },
+                        {
+                            title: 'Titulo 2',
+                            description: 'mi descripcion'
+                        }
+                    ]
+                };
+            },
+            watch: {
+                puerta(value, old){
+                    // value is the new value, old is the last value
+                    console.log('ejecutado', value, old, this.text)
+                    if (value) {
+                        this.text = 'La puerta esta abierta'
+                    }else {
+                        this.text = 'La puerta esta cerrada'
+                    }
+                }
+            },
+            computed: {
+                textButton(){
+                    return this.puerta ? 'Cerrar' : 'Abrir'
+                }, 
+                styles(){
+                    return this.puerta ? ['open'] : ['closed']
+                }
+            },
+            // :class=" { 'open': puerta, 'closed': !puerta } " usando un Json 
+            template: `
+                <div class='container' :class="styles">
+                    <div>{{text}}</div>
+                    <button @click='puerta = !puerta'>{{textButton}}</button>
+
+                    <div v-for="(item, i) in posts" :key="i">
+                        <h1>{{item.title}}</h1><span>Indice {{i}}</span>
+                        <h2>{{item.description}}</h2>
+                    </div>
+                </div>
+            `
+
+        }).mount("#app");
+    </script>
+</body>
+<style>
+    html, body {
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #app, .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+    button {
+        margin-top: 24px;
+        border: none;
+        background-color: white;
+        padding: 8px 24px;
+        border-radius: 12px;
+    }
+    .closed {
+        background-color: #eca1a6;
+    }
+    .open {
+        background-color: #b5e7a0;
+    }
+    </style>
+</html>
