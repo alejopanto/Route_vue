@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- CDN -->
+    <script src="https://unpkg.com/vue@next"></script>
+    
+    <div id="app"></div>
+
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return{
+                    text: "hola vue"
+                }
+            },
+            template: `
+                <div>
+                    <div>{{ text }}</div>
+                    <v-input v-model:value="text" />    
+                </div>
+            `
+
+        });
+        
+        app.component("v-input", {
+            props: ['value'],
+            methods: {
+                input(e){
+                    this.$emit("update:value", e.target.value)
+                }
+            },
+            template: `
+                <input type="text" :value="value" v-on:input="input" >
+            `
+        })
+
+        const vm = app.mount("#app");
+
+    </script>
+</body>
+</html>
