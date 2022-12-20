@@ -129,8 +129,8 @@
                         this.cart[prodIndex].quantity += 1;
                     }else {
                         this.cart.push(this.product);
-                        this.product.stock -= 1;
                     }
+                    this.product.stock -= 1;
                 }
             }
         });
