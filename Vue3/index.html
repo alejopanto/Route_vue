@@ -4,30 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiii</title>
+    <title>with vue3</title>
 </head>
 <body>
-    <div id="'app">
-        <span></span>
-        <hr>
-        <input type="text">
+    <div id="app">
+        <span v-text="message"></span>
+        <br>
+        <input type="text" v-model="message">
     </div>
 
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-        const data ={
-            message: 'Hola desde por aca'
-        }
-
-        const span = document.querySelector('span');
-        span.innerText = data.message;
-
-        const input = document.querySelector('input');
-        input.value = data.message
-
-        input.addEventListener('input', () => {
-            data.message = input.value;
-            span.innerText = data.message
-        })
+        const {createApp} = Vue;
+        const app = createApp({
+            data() {
+                return {
+                    message: 'Hola mdfk'
+                };
+            }
+        });
+        app.mount('#app')
     </script>
 </body>
 </html>
