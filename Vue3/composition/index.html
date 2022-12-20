@@ -82,11 +82,43 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script>
 
-        const { createApp } = Vue;
+        const { createApp, ref } = Vue;
 
         const app = createApp({
             setup() {
-                
+                const product = ref({
+                    name: "Camera",
+                    price: 450_000,
+                    stock: 3,
+                    content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo, facere quis animi, amet sequi iste ipsam rerum, necessitatibus tempora obcaecati consequatur maxime sint eos laboriosam veniam maiores voluptatem eum! Eveniet!`,
+                    images: [
+                        {
+                            image: "./images/camara.jpg",
+                            thumbnail: "./images/camara-thumb.jpg"
+                        },
+                        {
+                            image: "./images/camara-2.jpg",
+                            thumbnail: "./images/camara-2-thumb.jpg"
+                        }
+                    ],
+                    new: true,
+                    offer: false
+                });
+
+                const activeImage = ref(0);
+                const cartOpen = ref(false);
+                const cart = ref([]);
+
+                setTimeout( () => {
+                    activeImage.value = 1;
+                }, 2000);
+
+                return {
+                    product,
+                    activeImage,
+                    cartOpen,
+                    cart
+                }
             }
         });
 
