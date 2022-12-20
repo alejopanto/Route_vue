@@ -17,11 +17,11 @@
 
             <div class="cart-content">
                 <div class="cart-content__product">
-                    <img src="" alt="">
+                    <img :src="product.images[0].image" :alt="product.name">
                     <span>{{ product.name }} - $ {{ new Intl.NumberFormat("es-CO").format(product.price) }}</span>
                 </div>
                 <div class="cart-content__product">
-                    <img src="" alt="">
+                    <img :src="product.images[1].image" :alt="product.name">
                     <span>{{ product.name }} - $ {{ new Intl.NumberFormat("es-CO").format(product.price) }}</span>
                 </div>
             </div>
@@ -33,8 +33,14 @@
             <section class="product">
 
                 <div class="product__thumbnails">
-                    <div class="thumb"></div>
-                    <div class="thumb"></div>
+                    <div class="thumb"
+                        :class="{ active: activeImage == 0 }"
+                        :style="{ backgroundImage: 'url(' + product.images[0].thumbnail + ')' }"
+                    ></div>
+                    <div class="thumb"
+                        :class="{ active: activeImage == 1 }"
+                        :style="{ backgroundImage: 'url(' + product.images[1].thumbnail + ')' }"
+                    ></div>
                 </div>
 
                 <div class="product__image">
@@ -79,14 +85,15 @@
                         images: [
                             {
                                 image: "./images/camara.jpg",
-                                thumbail: "./images/camara-thumb.jpg"
+                                thumbnail: "./images/camara-thumb.jpg"
                             },
                             {
                                 image: "./images/camara-2.jpg",
-                                thumbail: "./images/camara-2-thumb.jpg"
+                                thumbnail: "./images/camara-2-thumb.jpg"
                             }
                         ]
-                    }           
+                    },
+                    activeImage: 1        
                 }
             }
         });
