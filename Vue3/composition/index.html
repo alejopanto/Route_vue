@@ -82,65 +82,81 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script>
 
-        const { createApp, ref } = Vue;
+        const { createApp, ref, reactive, toRefs } = Vue;
 
         const app = createApp({
+
             setup() {
-                const product = ref({
-                    name: "Camera",
-                    price: 450_000,
-                    stock: 3,
-                    content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo, facere quis animi, amet sequi iste ipsam rerum, necessitatibus tempora obcaecati consequatur maxime sint eos laboriosam veniam maiores voluptatem eum! Eveniet!`,
-                    images: [
-                        {
-                            image: "./images/camara.jpg",
-                            thumbnail: "./images/camara-thumb.jpg"
-                        },
-                        {
-                            image: "./images/camara-2.jpg",
-                            thumbnail: "./images/camara-2-thumb.jpg"
-                        }
-                    ],
-                    new: true,
-                    offer: false,
-                    quantity: 1
+
+                const productState = reactive({
+                    product: {
+                        name: "Camara",
+                        price: 450_000,
+                        stock: 5,
+                        content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo, facere quis animi, amet sequi iste ipsam rerum, necessitatibus tempora obcaecati consequatur maxime sint eos laboriosam veniam maiores voluptatem eum! Eveniet!`,
+                        images: [
+                            {
+                                image: "./images/camara.jpg",
+                                thumbnail: "./images/camara-thumb.jpg"
+                            },
+                            {
+                                image: "./images/camara-2.jpg",
+                                thumbnail: "./images/camara-2-thumb.jpg"
+                            }
+                        ],
+                        new: true,
+                        offer: true,
+                        quantity: 1
+                    },
+                    activeImage: 0
                 });
 
-                const cartOpen = ref(false);
-                const activeImage = ref(0);
-                const cart = ref([]);
-                const discountCodes = ref(['platzi20', 'jose20']);
+                const cartState = reactive({
+                    cartOpen: false,
+                    cart: []
+                });
 
                 function addToCart() {
-                    const prodIndex = cart.value.findIndex(prod => prod.name == product.value.name);
-                    if(prodIndex >= 0){
-                        cart.value[prodIndex].quantity += 1;
-                    }else {
-                        cart.value.push(product.value);
-                    }
-                    product.value.stock -= 1;
+
+                    const prodIndex = cartState.cart.findIndex(prod => prod.name == productState.product.name);
+
+                    if (prodIndex >= 0)
+                        cartState.cart[prodIndex].quantity += 1;
+                    else 
+                        cartState.cart.push(productState.product);
+
+                    productState.product.stock -= 1;
+
                 }
 
+
+                const discountCodes = ref(["platzi20", "jose20"]);
                 function applyDiscount(event) {
+
                     const discountCodeIndex = discountCodes.value.indexOf(event.target.value);
+
                     if (discountCodeIndex >= 0) {
-                        product.value.price *= 50/100
+                        productState.product.price *= 50/100;
                         discountCodes.value.splice(discountCodeIndex, 1)
-                    }else {
-                        alert('Ya se uso el codigo')
                     }
+
                 }
+
+                setTimeout(() => {
+                    activeImage = 1;
+                }, 2000);
 
                 return {
-                    product,
-                    activeImage,
-                    cartOpen,
-                    cart,
+                    // product: producState.product
+                    ...toRefs(productState),
+                    ...toRefs(cartState),
 
-                    addToCart,
-                    applyDiscount
+                    applyDiscount,
+                    addToCart
                 }
-            }
+
+            },
+
         });
 
         app.mount("#app");
