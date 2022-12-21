@@ -27,7 +27,7 @@ app.component("product", {
             <p class="description__status" v-if="product.stock == 3">Quedan pocas unidades</p>
             <p class="description__status" v-else-if="product.stock == 2">Se esta acabando</p>
             <p class="description__status" v-if="product.stock == 1">Ultima unidad</p>
-            <p class="description__price"> $ {{ new Intl.NumberFormat("es-CO").format(product.price) }} </p>
+            <p class="description__price" :style="{ color: price_color }"> $ {{ new Intl.NumberFormat("es-CO").format(product.price) }} </p>
             <p class="description__content"></p>
 
             <div class="discount">
@@ -48,7 +48,8 @@ app.component("product", {
     data() {
         return {
             activeImage: 0,
-            discountCodes: ['platzi20', 'jose20'] 
+            discountCodes: ['platzi20', 'jose20'],
+            price_color: "rgb(104, 104, 209)"
         }
     },
     methods: {
@@ -63,6 +64,13 @@ app.component("product", {
         },
         senToCart() {
             this.$emit("sentocart", this.product)
+        }
+    },
+    watch: {
+        "product.stock"(value) {
+            if (value <= 1) {
+                this.price_color = "rgb(104, 255, 209)"
+            }
         }
     }
 })
