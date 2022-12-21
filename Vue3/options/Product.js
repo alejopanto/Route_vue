@@ -39,11 +39,12 @@ app.component("product", {
                 >
             </div>
 
-            <button :disabled="product.stock === 0" @click="addToCart()">Agregar al carrito</button>
+            <button :disabled="product.stock === 0" @click="senToCart()">Agregar al carrito</button>
 
         </section>
     `,
     props: ['product'],
+    emits: ['sentocart'],
     data() {
         return {
             activeImage: 0,
@@ -60,14 +61,8 @@ app.component("product", {
                 alert('Ya se uso el codigo')
             }
         },
-        addToCart() {
-            const prodIndex = this.cart.findIndex(prod => prod.name == this.product.name);
-            if(prodIndex >= 0){
-                this.cart[prodIndex].quantity += 1;
-            }else {
-                this.cart.push(this.product);
-            }
-            this.product.stock -= 1;
+        senToCart() {
+            this.$emit("sentocart", this.product)
         }
     }
 })
