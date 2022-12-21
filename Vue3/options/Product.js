@@ -49,7 +49,7 @@ app.component("product", {
         return {
             activeImage: 0,
             discountCodes: ['platzi20', 'jose20'],
-            price_color: "rgb(104, 104, 209)"
+            // price_color: "rgb(104, 104, 209)"
         }
     },
     methods: {
@@ -67,10 +67,18 @@ app.component("product", {
         }
     },
     watch: {
-        "product.stock"(value) {
+        /* "product.stock"(value) {
             if (value <= 1) {
                 this.price_color = "rgb(104, 255, 209)"
             }
+        } */
+    },
+    computed:{
+        price_color(){
+            if (this.product.stock <= 1) {
+                return "rgb(104, 255, 209)"
+            }
+            return "rgb(104, 104, 209)"
         }
     }
 })
