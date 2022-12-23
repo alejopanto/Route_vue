@@ -42,90 +42,13 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script>
 
-        const { createApp, ref, reactive, toRefs, watch, computed } = Vue;
+        const { createApp, ref, reactive, toRefs, watch, computed, onMounted } = Vue;
 
         const app = createApp({
 
             setup() {
 
-                const products = ref([
-                    {
-                        name: "Camera",
-                        price: 450_000,
-                        stock: 3,
-                        content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo, facere quis animi, amet sequi iste ipsam rerum, necessitatibus tempora obcaecati consequatur maxime sint eos laboriosam veniam maiores voluptatem eum! Eveniet!`,
-                        images: [
-                            {
-                                image: "./images/camara.jpg",
-                                thumbnail: "./images/camara-thumb.jpg"
-                            },
-                            {
-                                image: "./images/camara-2.jpg",
-                                thumbnail: "./images/camara-2-thumb.jpg"
-                            }
-                        ],
-                        new: true,
-                        offer: true,
-                        quantity: 1
-                    },
-                    {
-                        name: "Camera PL",
-                        price: 550_000,
-                        stock: 3,
-                        content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo, facere quis animi, amet sequi iste ipsam rerum, necessitatibus tempora obcaecati consequatur maxime sint eos laboriosam veniam maiores voluptatem eum! Eveniet!`,
-                        images: [
-                            {
-                                image: "./images/camara.jpg",
-                                thumbnail: "./images/camara-thumb.jpg"
-                            },
-                            {
-                                image: "./images/camara-2.jpg",
-                                thumbnail: "./images/camara-2-thumb.jpg"
-                            }
-                        ],
-                        new: true,
-                        offer: false,
-                        quantity: 1
-                    },
-                    {
-                        name: "Camera PL2",
-                        price: 650_000,
-                        stock: 3,
-                        content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo, facere quis animi, amet sequi iste ipsam rerum, necessitatibus tempora obcaecati consequatur maxime sint eos laboriosam veniam maiores voluptatem eum! Eveniet!`,
-                        images: [
-                            {
-                                image: "./images/camara.jpg",
-                                thumbnail: "./images/camara-thumb.jpg"
-                            },
-                            {
-                                image: "./images/camara-2.jpg",
-                                thumbnail: "./images/camara-2-thumb.jpg"
-                            }
-                        ],
-                        new: false,
-                        offer: true,
-                        quantity: 1
-                    },
-                    {
-                        name: "Camera PL3",
-                        price: 750_000,
-                        stock: 3,
-                        content: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo, facere quis animi, amet sequi iste ipsam rerum, necessitatibus tempora obcaecati consequatur maxime sint eos laboriosam veniam maiores voluptatem eum! Eveniet!`,
-                        images: [
-                            {
-                                image: "./images/camara.jpg",
-                                thumbnail: "./images/camara-thumb.jpg"
-                            },
-                            {
-                                image: "./images/camara-2.jpg",
-                                thumbnail: "./images/camara-2-thumb.jpg"
-                            }
-                        ],
-                        new: false,
-                        offer: false,
-                        quantity: 1
-                    }
-                ])
+                const products = ref([])
 
                 const cartState = reactive({
                     cartOpen: true,
@@ -164,6 +87,16 @@
                         }, 0);
                     }
                 ) */
+
+                onMounted( () => {
+                    console.log('onMounted')
+                } )
+
+                fetch("https://my-json-server.typicode.com/iosamuel/demo/products")
+                    .then(res => res.json())
+                    .then(data => {
+                        products.value = data;
+                    });
 
                 return {
                     // product: producState.product
