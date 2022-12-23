@@ -1,6 +1,9 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <component :is="componente" msg="Hellow MDFK"></component>
+    <!-- <HelloWorld msg="componente"></HelloWorld> -->
+  </div>
 </template>
 
 <script>
@@ -10,6 +13,11 @@ export default {
   name: "App",
   components: {
     HelloWorld,
+  },
+  data() {
+    return {
+      componente: "HelloWorld",
+    };
   },
 };
 </script>
