@@ -1,24 +1,28 @@
 <template>
   <div>
     <img alt="Vue logo" src="./assets/logo.png" />
-    <component :is="componente" msg="Hellow MDFK"></component>
-    <!-- <HelloWorld msg="componente"></HelloWorld> -->
+    <!-- <component :is="componente" msg="Hellow MDFK"></component>-->
+    <HelloWorld msg="componente"></HelloWorld>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import { defineAsyncComponent } from "vue";
+// import HelloWorld from "./components/HelloWorld.vue";
+const HelloWorld = defineAsyncComponent(() =>
+  import("./components/HelloWorld.vue")
+);
 
 export default {
   name: "App",
   components: {
     HelloWorld,
   },
-  data() {
-    return {
-      componente: "HelloWorld",
-    };
-  },
+  // data() {
+  //  return {
+  //    componente: "HelloWorld",
+  //  };
+  //},
 };
 </script>
 
