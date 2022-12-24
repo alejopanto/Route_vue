@@ -1,14 +1,25 @@
 <template>
   <div>
+    <button @click="show = !show">Menu</button>
+    <transition name="fade">
+      <Menu v-show="show" />
+    </transition>
   </div>
 </template>
 
 <script>
+import Menu from "./Menu.vue";
 
 export default {
   name: "App",
   components: {
-  }
+    Menu,
+  },
+  data() {
+    return {
+      show: false,
+    };
+  },
 };
 </script>
 
