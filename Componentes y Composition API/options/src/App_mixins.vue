@@ -1,16 +1,17 @@
 <template>
   <div>
     {{ text }}
-    <Home />
+    <strong>{{ algo }}</strong>
   </div>
 </template>
 
 <script>
-import Home from "./Home.vue";
+import base from "./mixins/base";
 
 export default {
   name: "App",
-  components: { Home },
+  mixins: [base],
+  components: {},
   data() {
     return {
       text: "hola",
