@@ -1,21 +1,16 @@
 <template>
   <div>
-    {{ text }}
-    <strong>{{ algo }}</strong>
+    <Modal />
   </div>
 </template>
 
 <script>
-import base from "./mixins/base";
+import Modal from "./Modal.vue";
 
 export default {
   name: "App",
-  mixins: [base],
-  components: {},
-  data() {
-    return {
-      text: "hola",
-    };
+  components: {
+    Modal,
   },
 };
 </script>
