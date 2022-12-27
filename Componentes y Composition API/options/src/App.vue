@@ -1,7 +1,7 @@
 <template>
   <div>
     {{ text }}
-    <Home />
+    <Home first-name="Alejandro" last-name="Pantoja" />
   </div>
 </template>
 
