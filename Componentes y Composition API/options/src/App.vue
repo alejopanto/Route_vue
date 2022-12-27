@@ -1,20 +1,17 @@
 <template>
   <div>
-    {{ text }}
     <Home first-name="Alejandro" last-name="Pantoja" />
   </div>
 </template>
 
 <script>
 import Home from "./Home.vue";
-
+import { provide } from "vue";
 export default {
   name: "App",
   components: { Home },
-  data() {
-    return {
-      text: "hola",
-    };
+  setup() {
+    provide("username", "Aletop");
   },
 };
 </script>
