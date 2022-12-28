@@ -5,10 +5,11 @@
   <div>
     <h1>{{ username }}</h1>
   </div>
+  <button ref="btn">Click!</button>
 </template>
 
 <script>
-import { toRefs, computed, inject } from "vue";
+import { ref, toRefs, computed, watch, inject } from "vue";
 
 export default {
   props: {
@@ -24,9 +25,16 @@ export default {
 
     const username = inject("username");
 
+    const btn = ref(null);
+
+    watch(btn, (val) => {
+      console.log(val);
+    });
+
     return {
       fullName,
       username,
+      btn,
     };
   },
 };
