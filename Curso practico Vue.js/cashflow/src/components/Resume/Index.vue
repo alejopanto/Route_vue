@@ -1,6 +1,35 @@
 <template>
-  <main>Resume</main>
+  <main>
+    <p>{{ labelVisual }}</p>
+    <h1>{{ amountVisual }}</h1>
+  </main>
 </template>
+
+<script>
+export default {
+  props: {
+    label: {
+      type: String,
+    },
+    totalAmount: {
+      type: Number,
+    },
+    amount: {
+      type: Number,
+      default: null,
+    },
+  },
+
+  computed: {
+    labelVisual() {
+      return this.amount !== null ? "2023-02-22" : this.label;
+    },
+    amountVisual() {
+      return this.amount !== null ? this.amount : this.totalAmount;
+    },
+  },
+};
+</script>
 
 <style scoped>
 main {
