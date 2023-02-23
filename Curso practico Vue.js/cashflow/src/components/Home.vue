@@ -5,10 +5,14 @@
     </template>
     <template #resume>
       <Resume
-        :label="'Ahorro total'"
+        :total-label="'Ahorro total'"
+        :label="label"
         :total-amount="20876897"
         :amount="amount"
-      />
+      >
+        <template #graphic> graphic </template>
+        <template #action> action </template>
+      </Resume>
     </template>
     <template #movements>
       <Movements />
@@ -32,6 +36,7 @@ export default {
 
   data() {
     return {
+      label: null,
       amount: null,
     };
   },
