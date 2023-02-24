@@ -49,7 +49,7 @@ export default {
           id: 1,
           title: "Movimiento 2",
           description: "Una descripcion sin mucho sabor",
-          amount: 123456,
+          amount: -123456,
         },
         {
           id: 2,
@@ -61,7 +61,7 @@ export default {
           id: 3,
           title: "Movimiento 4",
           description: "Una descripcion sin mucho sabor",
-          amount: 123456,
+          amount: -123456,
         },
         {
           id: 4,
