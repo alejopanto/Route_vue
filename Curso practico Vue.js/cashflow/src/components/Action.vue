@@ -48,7 +48,7 @@ const emit = defineEmits(["create"]);
 const submit = () => {
   showModal.value = false;
   emit("create", {
-    id: new Date().getTime(),
+    id: new Date().getTime(), 
     title: title.value,
     description: description.value,
     amount: movementType.value === "Ingreso" ? amount.value : -amount.value,
