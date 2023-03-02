@@ -17,11 +17,11 @@
         </div>
         <div class="field">
           <label class="radio-label">
-            <input type="radio" v-model="momentType" value="Ingreso" />
+            <input type="radio" v-model="movementType" value="Ingreso" />
             <span>Ingreso</span>
           </label>
           <label class="radio-label">
-            <input type="radio" v-model="momentType" value="Gasto" />
+            <input type="radio" v-model="movementType" value="Gasto" />
             <span>Gasto</span>
           </label>
         </div>
@@ -34,17 +34,26 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineEmits } from "vue";
 import Modal from "./Modal.vue";
-const showModal = ref(false);
 
+const showModal = ref(false);
 const title = ref("");
 const amount = ref(0);
 const description = ref("");
-const momentType = ref("Ingreso");
+const movementType = ref("Ingreso");
+
+const emit = defineEmits(["create"]);
 
 const submit = () => {
   showModal.value = false;
+  emit("create", {
+    id: new Date().getTime(),
+    title: title.value,
+    description: description.value,
+    amount: movementType.value === "Ingreso" ? amount.value : -amount.value,
+    time: new Date(),
+  });
 };
 </script>
 
