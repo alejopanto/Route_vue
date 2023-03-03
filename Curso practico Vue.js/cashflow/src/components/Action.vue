@@ -48,12 +48,17 @@ const emit = defineEmits(["create"]);
 const submit = () => {
   showModal.value = false;
   emit("create", {
-    id: new Date().getTime(), 
+    id: new Date().getTime(),
     title: title.value,
     description: description.value,
     amount: movementType.value === "Ingreso" ? amount.value : -amount.value,
     time: new Date(),
   });
+
+  title.value = "";
+  amount.value = 0;
+  description.value = "";
+  movementType.value = "Ingreso";
 };
 </script>
 
